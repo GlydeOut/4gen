@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
 @Mixin(SurfaceGeneratorOverworld.class)
-public class OceanBorder {
+public class OceanBorderMixin {
 
 	@Shadow
 	private World world;
