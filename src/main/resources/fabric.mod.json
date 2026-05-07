@@ -16,20 +16,20 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"turniplabs.examplemod.ExampleMod"
+			"jsequitur.generation.FourGen"
 		],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"jsequitur.generation.FourGen"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"jsequitur.generation.FourGen"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"jsequitur.generation.FourGen"
 		]
 	},
 	"mixins": [
-		"examplemod.mixins.json"
+		"4gen.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
