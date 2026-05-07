@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "jsequitur.generation.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "PlayerMixin",
+    "NetherBorderMixin"
+  ],
+  "client": []
+}
