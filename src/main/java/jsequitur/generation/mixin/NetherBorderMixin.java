@@ -18,10 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(SurfaceGeneratorNether.class)
 public class NetherBorderMixin {
 
-	@Unique
-	private static final int borderLocation = 144;
-//	boolean flattened = true;
-
 	@Shadow
 	@Final
 	private World world;

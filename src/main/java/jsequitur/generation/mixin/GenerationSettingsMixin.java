@@ -20,9 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Environment(EnvType.CLIENT)
 @Mixin(GameSettings.class)
 public abstract class GenerationSettingsMixin implements FourGenSettingsOptions {
-	@Shadow
-	@Final
-	public Minecraft mc;
 
 	@SuppressWarnings("DataFlowIssue")
 	@Unique
