@@ -43,7 +43,7 @@ public class OceanBorderMixin {
 
 					for (int y = minY; y < maxY; y++) {
 
-						if (y <= minY + oceanY - 5) {
+						if (y <= minY + oceanY - 10) {
 							result.setBlock(x, y, z, worldFillBlock); // fill
 						}
 						else if (y <= minY + oceanY - 1) {
@@ -57,9 +57,10 @@ public class OceanBorderMixin {
 			ci.cancel();
 		}
 	}
+
 	@Inject (method = "generateSurface", at = @At("TAIL"))
 	private void lowerGround(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
-		int fadeStart = border - 16;
+		int fadeStart = border - 32;
 		int baseX = chunk.xPosition * 16;
 		int baseZ = chunk.zPosition * 16;
 
@@ -67,6 +68,12 @@ public class OceanBorderMixin {
 		boolean lowerNegX = baseX < -fadeStart;
 		boolean lowerPosZ = baseZ >= fadeStart;
 		boolean lowerNegZ = baseZ < -fadeStart;
+
+		boolean lowerPosX2 = baseX >= fadeStart + 16;
+		boolean lowerNegX2 = baseX < -fadeStart - 16;
+		boolean lowerPosZ2 = baseZ >= fadeStart + 16;
+		boolean lowerNegZ2 = baseZ < -fadeStart - 16;
+
 
 
 		int oceanY = world.getWorldType().getOceanY();
@@ -76,23 +83,25 @@ public class OceanBorderMixin {
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
 					int originalSurfaceHeight = findSurfaceHeight(x, z, result);
-					if (!(originalSurfaceHeight == oceanY && result.getBlock(x, originalSurfaceHeight - 1, z) == oceanBlock)) {
-						for (int y = 0; y < 4; y++) {
-							int target = originalSurfaceHeight - 4 + y - x;
-							int source = originalSurfaceHeight - 4 + y + 1;
-							result.setBlock(x, target, z, result.getBlock(x, source, z));
-							if (y == 3 && target + 1 <= oceanY) {
-								result.setBlock(x, target, z, oceanBlock);
-							}
+					int chunkNum = 0;
+					if (lowerPosX2) {
+						chunkNum = 1;
+					}
+					for (int y = 0; y < 4; y++) {
+						int target = originalSurfaceHeight - 4 + y - x - chunkNum * 16;
+						int source = originalSurfaceHeight - 4 + y + 1;
+						result.setBlock(x, target, z, result.getBlock(x, source, z));
+						if (y == 3 && target + 1 <= oceanY) {
+							result.setBlock(x, target, z, oceanBlock);
 						}
-						for (int i = 0; i < x; i ++) {
-							int target = originalSurfaceHeight - i - 1;
-							if (target < oceanY) {
-								result.setBlock(x, target, z, oceanBlock);
-							}
-							else {
-								result.setBlock(x, target, z, 0);
-							}
+					}
+					for (int i = 0; i < x + chunkNum * 16; i++) {
+						int target = originalSurfaceHeight - i - 1;
+						if (target < oceanY) {
+							result.setBlock(x, target, z, oceanBlock);
+						}
+						else {
+							result.setBlock(x, target, z, 0);
 						}
 					}
 				}
@@ -102,22 +111,24 @@ public class OceanBorderMixin {
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
 					int originalSurfaceHeight = findSurfaceHeight(15 - x, 15 - z, result);
-					if (!(originalSurfaceHeight == oceanY && result.getBlock(15 - x, originalSurfaceHeight - 1, 15 - z) == oceanBlock)) {
-						for (int y = 0; y < 4; y++) {
-							int target = originalSurfaceHeight - 4 + y - x;
-							int source = originalSurfaceHeight - 4 + y + 1;
-							result.setBlock((15 - x), target, (15 - z), result.getBlock((15 - x), source, (15 - z)));
-							if (y == 3 && target + 1 <= oceanY) {
-								result.setBlock((15 - x), target, (15 - z), oceanBlock);
-							}
+					int chunkNum = 0;
+					if (lowerNegX2) {
+						chunkNum = 1;
+					}
+					for (int y = 0; y < 4; y++) {
+						int target = originalSurfaceHeight - 4 + y - x - chunkNum * 16;
+						int source = originalSurfaceHeight - 4 + y + 1;
+						result.setBlock((15 - x), target, (15 - z), result.getBlock((15 - x), source, (15 - z)));
+						if (y == 3 && target + 1 <= oceanY) {
+							result.setBlock((15 - x), target, (15 - z), oceanBlock);
 						}
-						for (int i = 0; i < x; i++) {
-							int target = originalSurfaceHeight - i - 1;
-							if (target < oceanY) {
-								result.setBlock((15 - x), target, (15 - z), oceanBlock);
-							} else {
-								result.setBlock((15 - x), target, (15 - z), 0);
-							}
+					}
+					for (int i = 0; i < x + chunkNum * 16; i++) {
+						int target = originalSurfaceHeight - i - 1;
+						if (target < oceanY) {
+							result.setBlock((15 - x), target, (15 - z), oceanBlock);
+						} else {
+							result.setBlock((15 - x), target, (15 - z), 0);
 						}
 					}
 				}
@@ -127,23 +138,25 @@ public class OceanBorderMixin {
 			for (int z = 0; z < 16; z++) {
 				for (int x = 0; x < 16; x++) {
 					int originalSurfaceHeight = findSurfaceHeight(x, z, result);
-					if (!(originalSurfaceHeight == oceanY && result.getBlock(x, originalSurfaceHeight - 1, z) == oceanBlock)) {
-						for (int y = 0; y < 4; y++) {
-							int target = originalSurfaceHeight - 4 + y - z;
-							int source = originalSurfaceHeight - 4 + y + 1;
-							result.setBlock(x, target, z, result.getBlock(x, source, z));
-							if (y == 3 && target + 1 <= oceanY) {
-								result.setBlock(x, target, z, oceanBlock);
-							}
+					int chunkNum = 0;
+					if (lowerPosZ2) {
+						chunkNum = 1;
+					}
+					for (int y = 0; y < 4; y++) {
+						int target = originalSurfaceHeight - 4 + y - z - chunkNum * 16;
+						int source = originalSurfaceHeight - 4 + y + 1;
+						result.setBlock(x, target, z, result.getBlock(x, source, z));
+						if (y == 3 && target + 1 <= oceanY) {
+							result.setBlock(x, target, z, oceanBlock);
 						}
-						for (int i = 0; i < z; i ++) {
-							int target = originalSurfaceHeight - i - 1;
-							if (target < oceanY) {
-								result.setBlock(x, target, z, oceanBlock);
-							}
-							else {
-								result.setBlock(x, target, z, 0);
-							}
+					}
+					for (int i = 0; i < z + chunkNum * 16; i ++) {
+						int target = originalSurfaceHeight - i - 1;
+						if (target < oceanY) {
+							result.setBlock(x, target, z, oceanBlock);
+						}
+						else {
+							result.setBlock(x, target, z, 0);
 						}
 					}
 				}
@@ -153,39 +166,29 @@ public class OceanBorderMixin {
 			for (int z = 0; z < 16; z++) {
 				for (int x = 0; x < 16; x++) {
 					int originalSurfaceHeight = findSurfaceHeight(15 - x, 15 - z, result);
-					if (!(originalSurfaceHeight == oceanY && result.getBlock(15 - x, originalSurfaceHeight - 1, 15 - z) == oceanBlock)) {
-						for (int y = 0; y < 4; y++) {
-							int target = originalSurfaceHeight - 4 + y - z;
-							int source = originalSurfaceHeight - 4 + y + 1;
-							result.setBlock((15 - x), target, (15 - z), result.getBlock((15 - x), source, (15 - z)));
-							if (y == 3 && target + 1 <= oceanY) {
-								result.setBlock((15 - x), target, (15 - z), oceanBlock);
-							}
+					int chunkNum = 0;
+					if (lowerNegZ2) {
+						chunkNum = 1;
+					}
+					for (int y = 0; y < 4; y++) {
+						int target = originalSurfaceHeight - 4 + y - z - chunkNum * 16;
+						int source = originalSurfaceHeight - 4 + y + 1;
+						result.setBlock((15 - x), target, (15 - z), result.getBlock((15 - x), source, (15 - z)));
+						if (y == 3 && target + 1 <= oceanY) {
+							result.setBlock((15 - x), target, (15 - z), oceanBlock);
 						}
-						for (int i = 0; i < z; i++) {
-							int target = originalSurfaceHeight - i - 1;
-							if (target < oceanY) {
-								result.setBlock((15 - x), target, (15 - z), oceanBlock);
-							} else {
-								result.setBlock((15 - x), target, (15 - z), 0);
-							}
+					}
+					for (int i = 0; i < z + chunkNum * 16; i++) {
+						int target = originalSurfaceHeight - i - 1;
+						if (target < oceanY) {
+							result.setBlock((15 - x), target, (15 - z), oceanBlock);
+						} else {
+							result.setBlock((15 - x), target, (15 - z), 0);
 						}
 					}
 				}
 			}
 		}
-
-
-
-//		if (lowerZ) {
-//			for (int z = 0; z < 16; z++) {
-//				for (int x = 0; x < 16; x++) {
-//					for (int y = 0; y < z; y++) {
-//						result.setBlock(x, findSurfaceHeight(x, z, result) - 1, z, 0);
-//					}
-//				}
-//			}
-//		}
 	}
 	@Unique
 	private int findSurfaceHeight(int x, int z, ChunkGeneratorResult result) {
