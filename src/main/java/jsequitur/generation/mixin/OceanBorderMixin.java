@@ -1,5 +1,7 @@
 package jsequitur.generation.mixin;
 
+import jsequitur.generation.settings.FourGenSettingsOptions;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
 import net.minecraft.core.world.generate.chunk.ChunkGeneratorResult;
@@ -21,11 +23,31 @@ public class OceanBorderMixin {
 	private World world;
 
 	@Unique
-	private final int border = 432;
+	private static final Minecraft mc = Minecraft.getMinecraft();
 
 
 	@Inject(method = "generateSurface", at = @At("HEAD"), cancellable = true)
 	private void generateOcean(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
+
+		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int border = 0;
+		switch (size) {
+			case 0:
+				border = 432;
+				break;
+			case 1:
+				border = 512;
+				break;
+			case 2:
+				border = 1536;
+				break;
+			case 3:
+				border = 2560;
+				break;
+			case 4:
+				return;
+		}
+
 
 		int minY = this.world.getWorldType().getMinY();
 		int maxY = this.world.getWorldType().getMaxY();
@@ -60,6 +82,27 @@ public class OceanBorderMixin {
 
 	@Inject (method = "generateSurface", at = @At("TAIL"))
 	private void lowerGround(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
+
+		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int border = 0;
+		switch (size) {
+			case 0:
+				border = 432;
+				break;
+			case 1:
+				border = 512;
+				break;
+			case 2:
+				border = 1536;
+				break;
+			case 3:
+				border = 2560;
+				break;
+			case 4:
+				return;
+		}
+
+
 		int fadeStart = border - 32;
 		int baseX = chunk.xPosition * 16;
 		int baseZ = chunk.zPosition * 16;

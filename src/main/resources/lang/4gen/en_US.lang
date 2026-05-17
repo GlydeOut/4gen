@@ -1,0 +1,4 @@
+gui.options.page.fourGen.title=4Gen
+gui.options.page.fourGen.category.generation=Generation
+options.fourGen.worldSize=World Size
+options.fourGen.flatNether=Flatten Nether

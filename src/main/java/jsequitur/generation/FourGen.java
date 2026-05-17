@@ -1,5 +1,6 @@
 package jsequitur.generation;
 
+import jsequitur.generation.settings.FourGenSettings;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,5 +25,7 @@ public class FourGen implements ModInitializer, RecipeEntrypoint, GameStartEntry
 	public void beforeGameStart() {}
 
 	@Override
-	public void afterGameStart() {}
+	public void afterGameStart() {
+		FourGenSettings.init();
+	}
 }

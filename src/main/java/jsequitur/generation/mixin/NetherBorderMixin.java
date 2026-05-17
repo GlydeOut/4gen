@@ -1,5 +1,7 @@
 package jsequitur.generation.mixin;
 
+import jsequitur.generation.settings.FourGenSettingsOptions;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
@@ -25,11 +27,14 @@ public class NetherBorderMixin {
 	private World world;
 
 	@Unique
-	boolean flattened = true;
+	private static final Minecraft mc = Minecraft.getMinecraft();
+
 
 
 	@Inject(method = "generateSurface", at = @At("TAIL"))
 	private void flattenNether(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
+		boolean flattened = ((FourGenSettingsOptions) mc.gameSettings).fourGen$flatNether().value;
+
 		if (flattened) {
 			int minY = 127;
 			int maxY = 255;
@@ -59,6 +64,26 @@ public class NetherBorderMixin {
 	@Inject(method = "generateSurface", at = @At("TAIL"))
 	private void generateBorder(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
 
+		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int border = 0;
+		switch (size) {
+			case 0:
+				border = 144;
+				break;
+			case 1:
+				border = 176;
+				break;
+			case 2:
+				border = 256;
+				break;
+			case 3:
+				border = 320;
+				break;
+			case 4:
+				return;
+		}
+
+
 		int minY = this.world.getWorldType().getMinY();
 		int maxY = this.world.getWorldType().getMaxY();
 
@@ -70,7 +95,7 @@ public class NetherBorderMixin {
 				int worldX = baseX + x;
 				int worldZ = baseZ + z;
 
-				if (worldX == -borderLocation && worldZ < borderLocation && worldZ > -borderLocation) {
+				if (worldX == -border && worldZ < border && worldZ > -border) {
 					for (int y = minY; y < maxY; y++) {
 						result.setBlock(x, y, z, Blocks.BEDROCK.id());
 						if (5 * Math.random() > 2) {
@@ -84,7 +109,7 @@ public class NetherBorderMixin {
 						}
 					}
 				}
-				if (worldX == borderLocation - 1 && worldZ < borderLocation && worldZ > -borderLocation) {
+				if (worldX == border - 1 && worldZ < border && worldZ > -border) {
 					for (int y = minY; y < maxY; y++) {
 						result.setBlock(x, y, z, Blocks.BEDROCK.id());
 						if (5 * Math.random() > 2) {
@@ -98,7 +123,7 @@ public class NetherBorderMixin {
 						}
 					}
 				}
-				if (worldZ == -borderLocation && worldX < borderLocation && worldX > -borderLocation) {
+				if (worldZ == -border && worldX < border && worldX > -border) {
 					for (int y = minY; y < maxY; y++) {
 						result.setBlock(x, y, z, Blocks.BEDROCK.id());
 						if (5 * Math.random() > 2) {
@@ -112,7 +137,7 @@ public class NetherBorderMixin {
 						}
 					}
 				}
-				if (worldZ == borderLocation - 1 && worldX < borderLocation && worldX > -borderLocation) {
+				if (worldZ == border - 1 && worldX < border && worldX > -border) {
 					for (int y = minY; y < maxY; y++) {
 						result.setBlock(x, y, z, Blocks.BEDROCK.id());
 						if (5 * Math.random() > 2) {
