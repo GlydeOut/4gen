@@ -9,7 +9,8 @@
     "PlayerMixin",
     "NetherBorderMixin",
     "OceanBorderMixin",
-    "GenerationSettingsMixin"
+    "GenerationSettingsMixin",
+    "WorldScaleMixin"
   ],
   "client": []
 }
