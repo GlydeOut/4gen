@@ -28,7 +28,7 @@ public class FourGenSettings {
 	public static void registerSettings() {
 		FourGenSettingsOptions gameSettings = (FourGenSettingsOptions) Minecraft.getMinecraft().gameSettings;
 
-		OptionsPage FOUR_GEN = new OptionsPage("gui.options.page.fourGen.title", new ItemStack(Blocks.BEDROCK))
+		OptionsPage FOUR_GEN = new OptionsPage("gui.options.page.fourGen.title", new ItemStack(Blocks.WOOL, 1, 14))
 			.withComponent(new OptionsCategory("gui.options.page.fourGen.category.generation")
 				.withComponent(new ToggleableOptionComponent<>(gameSettings.fourGen$worldSize()))
 				.withComponent(new ToggleableOptionComponent<>(gameSettings.fourGen$flatNether()))
