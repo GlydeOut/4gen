@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "jsequitur.generation.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_8",
   "injectors": {
     "defaultRequire": 1
   },

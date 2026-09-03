@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "fourgen",
 	"version": "${version}",
 	"name": "4Gen",
-	"description": "A mod that backports world customization options from Legacy Console Edition into Better than Adventure!",
+	"description": "Backports world customization options from Legacy Console Edition into Better than Adventure!",
 	"authors": [
 		"John Sequitur"
 	],
