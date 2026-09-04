@@ -12,6 +12,8 @@ Infinite ocean and Nether bedrock wall.
 
 Appropriate Nether-Overworld travel ratios for limited worlds.
 
+Compatible with Better Than Legacy by Useless for the ultimate BTA Legacy experience!
+
 ## Requires
 
 - BTA 7.3_04
