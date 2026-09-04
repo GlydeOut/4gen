@@ -1,14 +1,14 @@
 {
 	"schemaVersion": 1,
-	"id": "fourgen",
+	"id": "fourjen",
 	"version": "${version}",
-	"name": "4Gen",
+	"name": "4Jen",
 	"description": "Backports world customization options from Legacy Console Edition into Better than Adventure!",
 	"authors": [
 		"John Sequitur"
 	],
 	"contact": {
-		"homepage": "github.com/JohnSequitur/4gen",
+		"homepage": "github.com/JohnSequitur/4Jen",
 		"sources": ""
 	},
 	"icon": "icon.png",
@@ -16,20 +16,20 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"jsequitur.generation.FourGen"
+			"jsequitur.generation.FourJen"
 		],
 		"beforeGameStart": [
-			"jsequitur.generation.FourGen"
+			"jsequitur.generation.FourJen"
 		],
 		"afterGameStart": [
-			"jsequitur.generation.FourGen"
+			"jsequitur.generation.FourJen"
 		],
 		"recipesReady": [
-			"jsequitur.generation.FourGen"
+			"jsequitur.generation.FourJen"
 		]
 	},
 	"mixins": [
-		"4gen.mixins.json"
+		"4Jen.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",

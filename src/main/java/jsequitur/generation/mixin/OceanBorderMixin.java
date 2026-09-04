@@ -1,6 +1,6 @@
 package jsequitur.generation.mixin;
 
-import jsequitur.generation.settings.FourGenSettingsOptions;
+import jsequitur.generation.settings.FourJenSettingsOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
@@ -29,7 +29,7 @@ public class OceanBorderMixin {
 	@Inject(method = "generateSurface", at = @At("HEAD"), cancellable = true)
 	private void generateOcean(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
 
-		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int size = ((FourJenSettingsOptions) mc.gameSettings).fourJen$worldSize().value;
 		int border = 0;
 		switch (size) {
 			case 0:
@@ -83,7 +83,7 @@ public class OceanBorderMixin {
 	@Inject (method = "generateSurface", at = @At("TAIL"))
 	private void lowerGround(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
 
-		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int size = ((FourJenSettingsOptions) mc.gameSettings).fourJen$worldSize().value;
 		int border = 0;
 		switch (size) {
 			case 0:

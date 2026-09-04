@@ -11,8 +11,8 @@ import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
-public class FourGenSettings {
-	private FourGenSettings() {
+public class FourJenSettings {
+	private FourJenSettings() {
 
 	}
 
@@ -26,12 +26,12 @@ public class FourGenSettings {
 	}
 
 	public static void registerSettings() {
-		FourGenSettingsOptions gameSettings = (FourGenSettingsOptions) Minecraft.getMinecraft().gameSettings;
+		FourJenSettingsOptions gameSettings = (FourJenSettingsOptions) Minecraft.getMinecraft().gameSettings;
 
-		OptionsPage FOUR_GEN = new OptionsPage("gui.options.page.fourGen.title", new ItemStack(Blocks.WOOL, 1, 14))
-			.withComponent(new OptionsCategory("gui.options.page.fourGen.category.generation")
-				.withComponent(new ToggleableOptionComponent<>(gameSettings.fourGen$worldSize()))
-				.withComponent(new ToggleableOptionComponent<>(gameSettings.fourGen$flatNether()))
+		OptionsPage FOUR_GEN = new OptionsPage("gui.options.page.fourJen.title", new ItemStack(Blocks.WOOL, 1, 14))
+			.withComponent(new OptionsCategory("gui.options.page.fourJen.category.generation")
+				.withComponent(new ToggleableOptionComponent<>(gameSettings.fourJen$worldSize()))
+				.withComponent(new ToggleableOptionComponent<>(gameSettings.fourJen$flatNether()))
 			);
 		OptionsPages.register(FOUR_GEN);
 	}

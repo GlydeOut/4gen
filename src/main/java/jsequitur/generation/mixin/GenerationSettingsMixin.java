@@ -1,16 +1,13 @@
 package jsequitur.generation.mixin;
 
-import jsequitur.generation.settings.FourGenSettingsOptions;
+import jsequitur.generation.settings.FourJenSettingsOptions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.Option;
 import net.minecraft.client.option.OptionBoolean;
 import net.minecraft.client.option.OptionRange;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,21 +16,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
 @Mixin(GameSettings.class)
-public abstract class GenerationSettingsMixin implements FourGenSettingsOptions {
+public abstract class GenerationSettingsMixin implements FourJenSettingsOptions {
 
 	@SuppressWarnings("DataFlowIssue")
 	@Unique
-	private final OptionRange worldSize = new OptionRange((GameSettings) (Object) this, "fourGen.worldSize", 4, 0, 4);
+	private final OptionRange worldSize = new OptionRange((GameSettings) (Object) this, "fourJen.worldSize", 4, 0, 4);
 	@Override
-	public OptionRange fourGen$worldSize() {
+	public OptionRange fourJen$worldSize() {
 		return worldSize;
 	}
 
 	@SuppressWarnings("DataFlowIssue")
 	@Unique
-	private final OptionBoolean flatNether = new OptionBoolean((GameSettings) (Object) this, "fourGen.flatNether", false);
+	private final OptionBoolean flatNether = new OptionBoolean((GameSettings) (Object) this, "fourJen.flatNether", false);
 	@Override
-	public OptionBoolean fourGen$flatNether() {
+	public OptionBoolean fourJen$flatNether() {
 		return flatNether;
 	}
 

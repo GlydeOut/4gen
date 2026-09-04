@@ -1,6 +1,6 @@
 package jsequitur.generation.mixin;
 
-import jsequitur.generation.settings.FourGenSettingsOptions;
+import jsequitur.generation.settings.FourJenSettingsOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
@@ -29,7 +29,7 @@ public class NetherBorderMixin {
 
 	@Inject(method = "generateSurface", at = @At("TAIL"))
 	private void flattenNether(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
-		boolean flattened = ((FourGenSettingsOptions) mc.gameSettings).fourGen$flatNether().value;
+		boolean flattened = ((FourJenSettingsOptions) mc.gameSettings).fourJen$flatNether().value;
 
 		if (flattened) {
 			int minY = 127;
@@ -60,7 +60,7 @@ public class NetherBorderMixin {
 	@Inject(method = "generateSurface", at = @At("TAIL"))
 	private void generateBorder(Chunk chunk, ChunkGeneratorResult result, CallbackInfo ci) {
 
-		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int size = ((FourJenSettingsOptions) mc.gameSettings).fourJen$worldSize().value;
 		int border = 0;
 		switch (size) {
 			case 0:
