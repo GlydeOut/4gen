@@ -1,6 +1,6 @@
 package jsequitur.generation.mixin;
 
-import jsequitur.generation.settings.FourGenSettingsOptions;
+import jsequitur.generation.settings.FourJenSettingsOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +17,7 @@ public class PlayerMixin {
 	@ModifyVariable(method = "move", at = @At("HEAD"), ordinal = 0)
 	private double modifyDX(double dx) {
 
-		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int size = ((FourJenSettingsOptions) mc.gameSettings).fourJen$worldSize().value;
 		if (size == 4) {
 			return dx;
 		}
@@ -50,7 +50,7 @@ public class PlayerMixin {
 	@ModifyVariable(method = "move", at = @At("HEAD"), ordinal = 2)
 	private double modifyDZ(double dz) {
 
-		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int size = ((FourJenSettingsOptions) mc.gameSettings).fourJen$worldSize().value;
 		if (size == 4) {
 			return dz;
 		}

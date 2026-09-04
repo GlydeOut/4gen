@@ -1,6 +1,6 @@
 package jsequitur.generation.mixin;
 
-import jsequitur.generation.settings.FourGenSettingsOptions;
+import jsequitur.generation.settings.FourJenSettingsOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.world.Dimension;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +27,7 @@ public class WorldScaleMixin {
 			return;
 		}
 
-		int size = ((FourGenSettingsOptions) mc.gameSettings).fourGen$worldSize().value;
+		int size = ((FourJenSettingsOptions) mc.gameSettings).fourJen$worldSize().value;
 
 		float classicRatio = 0.333F;
 		float smallRatio = 0.333F;
