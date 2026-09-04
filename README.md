@@ -14,7 +14,7 @@ Appropriate Nether-Overworld travel ratios for limited worlds.
 
 ## Requires
 
-- BTA 7.3_4
+- BTA 7.3_04
 - Halplibe
 
 ## Important
